@@ -1,0 +1,19 @@
+<!-- res/menu/nav_menu.xml -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_privacy"
+        android:icon="@drawable/ic_privacy"
+        android:title="Privacy" />
+    <item
+        android:id="@+id/nav_authentication"
+        android:icon="@drawable/ic_authentication"
+        android:title="Authentication" />
+    <item
+        android:id="@+id/nav_personal_info"
+        android:icon="@drawable/ic_info"
+        android:title="Personal Info" />
+    <item
+        android:id="@+id/nav_logout"
+        android:icon="@drawable/ic_logout"
+        android:title="Logout" />
+</menu>

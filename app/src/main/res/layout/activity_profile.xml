@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@drawable/purple_gradient_bg">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Email input field -->
+        <EditText
+            android:id="@+id/emailEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Email"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/stylish_edittext"
+            android:padding="12dp"
+            android:textColor="#000000"
+            android:textColorHint="#BBBBBB"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/emailTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/emailEditText"
+            android:text="Your Email:"
+            android:textColor="#FFFFFF"
+            android:visibility="gone"
+            android:layout_marginTop="5dp" />
+
+        <!-- Image display -->
+        <ImageView
+            android:id="@+id/profileImageView"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_below="@id/emailTextView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:contentDescription="Profile Image"
+            android:scaleType="centerCrop"
+            android:background="@drawable/ic_profile"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Upload button -->
+        <Button
+            android:id="@+id/uploadButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/profileImageView"
+            android:background="@drawable/gradient_button_background"
+            android:text="Upload Image"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp" />
+
+        <!-- Update button -->
+        <Button
+            android:id="@+id/updateButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/uploadButton"
+            android:background="@drawable/gradient_button_background"
+            android:text="Update Image"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+
+        <!-- Delete button -->
+        <Button
+            android:id="@+id/deleteButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/updateButton"
+            android:background="@drawable/gradient_button_background"
+            android:text="Delete Image"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+
+        <!-- Fetch button -->
+        <Button
+            android:id="@+id/fetchButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/deleteButton"
+            android:background="@drawable/gradient_button_background"
+            android:text="Fetch Images"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+    </RelativeLayout>
+</ScrollView>

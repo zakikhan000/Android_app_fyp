@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center"
+    android:background="@drawable/purple_gradient_bg"
+    tools:context=".Authentication">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@color/white"
+        >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update Your Authentication"
+        android:textColor="#9C27B0"
+        android:fontFamily="cursive"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        />
+    <!-- Email Label and EditText -->
+    <TextView
+        android:id="@+id/tv_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#9C27B0"
+        android:textStyle="bold"
+        android:text="Email: " />
+
+    <EditText
+        android:id="@+id/et_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/stylish_edittext"
+        android:text="khanzaki006006@gmail.com"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/white"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Username Label and EditText -->
+    <TextView
+        android:id="@+id/tv_username"
+        android:layout_width="wrap_content"
+        android:textColor="#9C27B0"
+        android:textStyle="bold"
+        android:layout_height="wrap_content"
+        android:text="Username: " />
+
+    <EditText
+        android:id="@+id/et_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="khanzaki"
+        android:background="@drawable/stylish_edittext"
+        android:textColor="@color/white"
+        android:inputType="textPersonName"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Phone Number Label and EditText -->
+    <TextView
+        android:id="@+id/tv_phone"
+        android:layout_width="wrap_content"
+        android:textColor="#9C27B0"
+        android:textStyle="bold"
+        android:layout_height="wrap_content"
+        android:text="Phone no#" />
+
+    <EditText
+        android:id="@+id/et_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="03121093031"
+        android:background="@drawable/stylish_edittext"
+        android:textColor="@color/white"
+        android:inputType="phone"
+        android:layout_marginBottom="16dp" />
+    <!-- Old Password Label and EditText -->
+    <TextView
+        android:id="@+id/tv_old_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#9C27B0"
+        android:textStyle="bold"
+        android:text="Old Password: " />
+
+    <EditText
+        android:id="@+id/et_old_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textColorHint="#FFFFFF"
+        android:hint="Enter Old Password"
+        android:background="@drawable/stylish_edittext"
+        android:inputType="textPassword"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Password Label and EditText -->
+    <TextView
+        android:id="@+id/tv_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#9C27B0"
+        android:textStyle="bold"
+        android:text="Password: " />
+
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Password"
+        android:background="@drawable/stylish_edittext"
+        android:textColorHint="@color/white"
+        android:inputType="textPassword"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Confirm Password Label and EditText -->
+    <TextView
+        android:id="@+id/tv_confirm_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#9C27B0"
+        android:textStyle="bold"
+        android:text="Confirm Password: " />
+
+    <EditText
+        android:id="@+id/et_confirm_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Confirm Password: "
+        android:background="@drawable/stylish_edittext"
+        android:textColorHint="@color/white"
+        android:inputType="textPassword"
+        android:layout_marginBottom="16dp" />
+
+
+    <!-- Update Button -->
+    <Button
+        android:id="@+id/updatebt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:background="@drawable/gradient_button_background"
+        android:text="Update" />
+
+    </LinearLayout>
+
+</LinearLayout>
