@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@drawable/purple_gradient_bg"
+    tools:context=".Privacy">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/profile"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:text="Hi, Muhammad Zaki Khan, Please Select Your Profile Privacy"/>
+    <!-- Hide Your Picture -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:text="Hide your picture:" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cb_hide_pic_yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:text="Yes" />
+
+        <CheckBox
+            android:id="@+id/cb_hide_pic_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:text="No" />
+    </LinearLayout>
+
+    <!-- Hide Your Real Name -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:text="Hide your real name:" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cb_hide_name_yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:text="Yes" />
+
+        <CheckBox
+            android:id="@+id/cb_hide_name_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:text="No" />
+    </LinearLayout>
+
+    <!-- Hide Your Email -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:text="Hide your email:" />
+
+    <CheckBox
+        android:id="@+id/cb_hide_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:text="Hide Email" />
+
+    <!-- Hide Your Phone Number -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:text="Hide your phone number:" />
+
+    <CheckBox
+        android:id="@+id/cb_hide_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:text="Hide Phone Number" />
+
+    <!-- Hide Your Username -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:text="Hide your username:" />
+
+    <CheckBox
+        android:id="@+id/cb_hide_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:text="Hide Username" />
+
+    <!-- Enable Anonymous Picture -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/enable"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:text="Enable your anonymous picture:" />
+
+    <CheckBox
+        android:id="@+id/cb_enable_anonymous_pic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:text="Enable Anonymous Picture" />
+
+</LinearLayout>

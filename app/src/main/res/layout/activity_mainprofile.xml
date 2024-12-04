@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    >
+
+    <!-- Profile Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+     >
+
+        <!-- Profile Image -->
+        <ImageView
+            android:id="@+id/profileImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginEnd="16dp"
+           android:contentDescription="Profile Image"
+            android:scaleType="centerCrop" />
+
+        <!-- User Details -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- Full Name -->
+            <TextView
+                android:id="@+id/fullName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Full Name"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                />
+
+            <!-- Middle Name -->
+            <TextView
+                android:id="@+id/middleName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Middle Name"
+                android:textSize="16sp"
+                android:paddingBottom="4dp" />
+
+            <!-- Last Name -->
+            <TextView
+                android:id="@+id/lastName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Last Name"
+                android:textSize="16sp"
+                android:paddingBottom="4dp" />
+
+            <!-- Username -->
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Username"
+                android:textSize="16sp"
+                android:paddingBottom="4dp" />
+
+            <!-- Email -->
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DDDDDD"
+        android:layout_marginBottom="16dp" />
+
+
+    <!-- RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="435dp"
+        tools:listitem="@layout/custompost"
+        android:layout_marginTop="8dp"
+        android:scrollbars="vertical" />
+
+    <LinearLayout
+        android:id="@+id/hardcoded_navigation_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom"
+        android:gravity="bottom"
+        android:layout_marginTop="220dp"
+        android:background="@drawable/purple_gradient_bg"
+        android:padding="8dp">
+
+        <Button
+            android:id="@+id/nav_home"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/circlebutton"
+            android:drawableTop="@drawable/ic_home"
+            android:gravity="center"
+            android:text=""
+            android:minHeight="48dp" />
+
+        <Button
+            android:id="@+id/nav_notifications"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/circlebutton"
+            android:drawableTop="@drawable/ic_notification"
+            android:gravity="center"
+            android:text=""
+            android:minHeight="48dp" />
+
+        <Button
+            android:id="@+id/nav_create_post"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/circlebutton"
+            android:drawableTop="@drawable/ic_add"
+            android:gravity="center"
+            android:text=""
+            android:minHeight="48dp" />
+
+        <Button
+            android:id="@+id/nav_profile"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/circlebutton"
+            android:drawableTop="@drawable/ic_profile"
+            android:gravity="center"
+            android:text=""
+            android:minHeight="48dp" />
+
+        <Button
+            android:id="@+id/nav_settings"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/circlebutton"
+            android:drawableTop="@drawable/ic_setting"
+            android:gravity="center"
+            android:text=""
+            android:minHeight="48dp" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="360dp"
+    android:height="640dp"
+    android:viewportWidth="360"
+    android:viewportHeight="640">
+
+    <!-- Overlapping Geometric Triangles -->
+    <path
+        android:fillColor="#66BB6A"
+        android:pathData="M0,0 L180,320 L0,640 Z" />
+
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M180,0 L360,320 L180,640 Z" />
+
+    <path
+        android:fillColor="#A5D6A7"
+        android:pathData="M0,320 L180,640 L0,640 Z" />
+</vector>

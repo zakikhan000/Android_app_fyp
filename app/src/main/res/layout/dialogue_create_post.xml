@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@drawable/rounded_box"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create Post"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="12dp" />
+    <EditText
+        android:id="@+id/post_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Write your Title post here"
+
+        android:background="@android:color/white"
+        android:padding="8dp"
+        android:gravity="top" />
+    <EditText
+        android:id="@+id/post_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Write your post here"
+        android:minHeight="100dp"
+        android:background="@android:color/white"
+        android:padding="8dp"
+        android:gravity="top" />
+
+    <Button
+        android:id="@+id/submit_post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:background="@drawable/gradient_button_2"
+        android:text="Submit" />
+
+</LinearLayout>

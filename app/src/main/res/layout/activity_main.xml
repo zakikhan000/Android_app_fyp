@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp"
+    android:background="@drawable/purple_gradient_bg"
+    tools:context=".MainActivity">
+    <TextView
+        android:id="@+id/txt_demo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Find Your Anonymous Image"
+        android:textSize="35sp"
+        android:textColor="#FFFFFF"
+        android:fontFamily="cursive"
+        android:textStyle="bold"
+        android:layout_marginBottom="15dp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@color/white"
+        android:gravity="center"
+        >
+
+
+    <EditText
+        android:id="@+id/edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="Type image title"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:background="@drawable/stylish_edittext"
+        />
+
+
+    <EditText
+        android:id="@+id/edit_image_mumber"
+        android:layout_width="204dp"
+        android:layout_height="wrap_content"
+        android:hint="Hello World!"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.173"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_generate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Generate"
+        android:textColor="@color/white"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/gradient_button_background"
+        android:gravity="center"
+
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="0dp"
+        android:text="Hello World!"
+        android:layout_marginTop="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_image_mumber" />
+
+    <ProgressBar
+        android:id="@+id/prgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/edit_image_mumber"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    </LinearLayout>
+
+
+</LinearLayout>
