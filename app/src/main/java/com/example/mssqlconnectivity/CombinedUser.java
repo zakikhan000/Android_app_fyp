@@ -164,4 +164,8 @@ public class CombinedUser {
     public void setUsername(String username) {
         Username = username;
     }
+
+    public void Test(){
+        System.out.println("Testing push");
+    }
 }
