@@ -54,6 +54,7 @@ public class UserActivity extends AppCompatActivity {
         buttonSubmit.setVisibility(View.GONE);  // Hide Register button
         progressBar.setVisibility(View.VISIBLE); // Show ProgressBar (loading)
 
+        //must convert into string
         String email = editTextEmail.getText().toString();
         String phone = editTextPhone.getText().toString();
         String username = editTextUsername.getText().toString();
@@ -92,7 +93,7 @@ public class UserActivity extends AppCompatActivity {
         // Create a user registration request
         UserRegistrationRequest userRequest = new UserRegistrationRequest(email, username, password, confirmPassword, phone);
 
-        // Call the API for registration
+         // Call the API for registration
         ApiService apiService = ApiClient.getApiClient().create(ApiService.class);
         Call<Void> call = apiService.registerUser(userRequest);
         call.enqueue(new Callback<Void>() {

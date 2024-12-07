@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import okhttp3.OkHttpClient;
 
 public class ApiClient {
-    private static final String BASE_URL = "  https://mydatabase.loophole.site/";
+    private static final String BASE_URL = "https://mydatabase.loophole.site/";
     private static Retrofit retrofit = null;
 
     public static Retrofit getApiClient() {
