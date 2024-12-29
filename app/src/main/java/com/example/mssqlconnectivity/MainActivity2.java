@@ -1,22 +1,30 @@
 package com.example.mssqlconnectivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.drawerlayout.widget.DrawerLayout;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import androidx.core.view.GravityCompat;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
+import com.example.mssqlconnectivity.ApiClient;
+import com.example.mssqlconnectivity.ApiService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity2 extends AppCompatActivity {
 
@@ -24,52 +32,60 @@ public class MainActivity2 extends AppCompatActivity {
     Intent intent;
     String email, password, conpassword, username, phone, fn,mn,ln,age,country,city,an,postal;
 
+    Button nav_settings, nav_profile, nav_notification;
+    private RecyclerView recyclerView;
+    private CombinedDataAdapter adapter;
+    private ProgressBar progressBar;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private Button createPostButton;
 
-    Button nav_settings,nav_profile, nav_notification;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
+        // Initialize UI components
         drawerLayout = findViewById(R.id.drawer_layout);
         nav_settings = findViewById(R.id.nav_settings);
         nav_profile = findViewById(R.id.nav_profile);
         nav_notification = findViewById(R.id.nav_notifications);
-        Button createPostButton = findViewById(R.id.nav_create_post);
+        createPostButton = findViewById(R.id.nav_create_post);
+        recyclerView = findViewById(R.id.recycler_view);
+        progressBar = new ProgressBar(this, null, android.R.attr.progressBarStyleLarge);
+        progressBar.setVisibility(View.GONE);
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
 
-        createPostButton.setOnClickListener(v -> {
-            // Inflate the custom layout
-            View dialogView = getLayoutInflater().inflate(R.layout.dialogue_create_post, null);
+        // Set up RecyclerView
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-            // Create the dialog
-            AlertDialog dialog = new AlertDialog.Builder(this)
-                    .setView(dialogView)
-                    .create();
+        // Load data initially
+        loadData();
 
-            // Set dialog window attributes
-            if (dialog.getWindow() != null) {
-                dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        // Set up SwipeRefreshLayout
+        swipeRefreshLayout.setOnRefreshListener(() -> loadData());
+
+        // Create Post button functionality
+        createPostButton.setOnClickListener(v -> showCreatePostDialog());
+
+        // Handle Navigation Drawer item clicks
+        NavigationView navigationView = findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(menuItem -> {
+            int itemId = menuItem.getItemId();
+
+            if (itemId == R.id.nav_privacy) {
+                nextActivity(Privacy.class);
+            } else if (itemId == R.id.nav_authentication) {
+                nextActivity(Authentication.class);
+            } else if (itemId == R.id.nav_personal_info) {
+                nextActivity(PersonalInfo.class);
+            } else if (itemId == R.id.nav_logout) {
+                nextActivity(Login.class);
             }
-
-            // Set up dialog interactions
-            Button submitPostButton = dialogView.findViewById(R.id.submit_post);
-            submitPostButton.setOnClickListener(view -> {
-                // Handle submit action
-                EditText postContent = dialogView.findViewById(R.id.post_content);
-                String postText = postContent.getText().toString().trim();
-
-                if (!postText.isEmpty()) {
-                    Toast.makeText(this, "Post Submitted: " + postText, Toast.LENGTH_SHORT).show();
-                    dialog.dismiss(); // Close dialog
-                } else {
-                    Toast.makeText(this, "Please write something!", Toast.LENGTH_SHORT).show();
-                }
-            });
-
-            dialog.show(); // Display the dialog
+            drawerLayout.closeDrawer(GravityCompat.END);
+            return true;
         });
 
-
-
+        // Get passed intent data
         Intent i = getIntent();
         email = i.getStringExtra("email");
         password = i.getStringExtra("pass");
@@ -85,7 +101,9 @@ public class MainActivity2 extends AppCompatActivity {
         an = i.getStringExtra("an");
         postal = i.getStringExtra("postal");
 
-
+        // Open settings drawer
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        Button nav_settings = findViewById(R.id.nav_settings); // Assuming it's a Button
 
         nav_settings.setOnClickListener(v -> {
             if (drawerLayout != null) {
@@ -93,58 +111,111 @@ public class MainActivity2 extends AppCompatActivity {
             }
         });
 
-        nav_profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent = new Intent(getApplicationContext(), MainprofileActivity.class);
-                startActivity(intent);
-            }
+        // Navigate to profile
+        nav_profile.setOnClickListener(v -> {
+            intent = new Intent(getApplicationContext(), MainprofileActivity.class);
+            startActivity(intent);
         });
 
-        nav_notification.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent = new Intent(getApplicationContext(), NotificationActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
-      /*  BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-
-       bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-           int itemId = item.getItemId();
-
-            if (itemId == R.id.nav_settings) {
-                drawerLayout.openDrawer(GravityCompat.END);  // Open drawer from the right
-                return true;
-            } else {
-                // Handle other navigation items
-                return false;
-            }
-        });
-*/
-        // Handle Navigation Drawer item clicks
-        NavigationView navigationView = findViewById(R.id.navigation_view);
-        navigationView.setNavigationItemSelectedListener(menuItem -> {
-            int itemId = menuItem.getItemId();
-
-            if (itemId == R.id.nav_privacy) {
-                nextActivity(Privacy.class);
-            } else if (itemId == R.id.nav_authentication) {
-                nextActivity(Authentication.class);
-            } else if (itemId == R.id.nav_personal_info) {
-                nextActivity(PersonalInfo.class);
-            } else if (itemId == R.id.nav_logout) {
-               nextActivity(Login.class);
-            }
-            drawerLayout.closeDrawer(GravityCompat.END);
-            return true;
+        // Navigate to notifications
+        nav_notification.setOnClickListener(v -> {
+            intent = new Intent(getApplicationContext(), NotificationActivity.class);
+            startActivity(intent);
         });
     }
+
+    // Load data for RecyclerView
+    private void loadData() {
+        if (!swipeRefreshLayout.isRefreshing()) {
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        ApiService apiService = ApiClient.getApiClient().create(ApiService.class);
+        Call<CombinedDataResponse> call = apiService.getCombinedData();
+
+        call.enqueue(new Callback<CombinedDataResponse>() {
+            @Override
+            public void onResponse(Call<CombinedDataResponse> call, Response<CombinedDataResponse> response) {
+                progressBar.setVisibility(View.GONE);
+                swipeRefreshLayout.setRefreshing(false); // Stop refresh animation
+
+                if (response.isSuccessful()) {
+                    CombinedDataResponse combinedDataResponse = response.body();
+                    adapter = new CombinedDataAdapter(combinedDataResponse.getCombinedData());
+                    recyclerView.setAdapter(adapter);
+                } else {
+                    Toast.makeText(MainActivity2.this, "Failed to get data", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CombinedDataResponse> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
+                swipeRefreshLayout.setRefreshing(false); // Stop refresh animation
+                Toast.makeText(MainActivity2.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    // Show the post creation dialog
+    private void showCreatePostDialog() {
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialog_create_post, null);
+
+        EditText emailEditText = dialogView.findViewById(R.id.editTextEmail);
+        EditText titleEditText = dialogView.findViewById(R.id.editTextTitle);
+        EditText contentEditText = dialogView.findViewById(R.id.editTextContent);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(dialogView)
+                .setTitle("Create New Post")
+                .setPositiveButton("Create Post", (dialog, which) -> {
+                    String email = emailEditText.getText().toString();
+                    String title = titleEditText.getText().toString();
+                    String content = contentEditText.getText().toString();
+
+                    if (email.isEmpty() || title.isEmpty() || content.isEmpty()) {
+                        Toast.makeText(MainActivity2.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+                    } else {
+                        createPost(email, title, content);
+                    }
+                })
+                .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
+                .create()
+                .show();
+    }
+
+    // Handle post creation
+    private void createPost(String email, String title, String content) {
+        progressBar.setVisibility(View.VISIBLE);
+
+        ApiService apiService = ApiClient.getApiClient().create(ApiService.class);
+        CreatePostRequest postRequest = new CreatePostRequest(email, title, content);
+
+        Call<CreatePostResponse> call = apiService.createPost(postRequest);
+
+        call.enqueue(new Callback<CreatePostResponse>() {
+            @Override
+            public void onResponse(Call<CreatePostResponse> call, Response<CreatePostResponse> response) {
+                progressBar.setVisibility(View.GONE);
+
+                if (response.isSuccessful()) {
+                    Toast.makeText(MainActivity2.this, "Post created successfully!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity2.this, "Failed to create post", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CreatePostResponse> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
+                Toast.makeText(MainActivity2.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     private void nextActivity(Class<?> targetActivity) {
         Intent i = new Intent(this, targetActivity);
-        i.putExtra("email", email);
         i.putExtra("email", email);
         i.putExtra("pass", password);
         i.putExtra("phone", phone);
@@ -156,7 +227,7 @@ public class MainActivity2 extends AppCompatActivity {
         i.putExtra("age", age);
         i.putExtra("country", country);
         i.putExtra("city", city);
-        i.putExtra("an",an);
+        i.putExtra("an", an);
         i.putExtra("postal", postal);
         startActivity(i);
     }

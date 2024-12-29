@@ -58,6 +58,7 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment:2.8.3")
     implementation("androidx.navigation:navigation-ui:2.8.3")
     implementation("androidx.activity:activity:1.9.3")
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.13.2")
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("com.google.android.material:material:1.12.0")

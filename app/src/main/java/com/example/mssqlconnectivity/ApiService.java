@@ -71,4 +71,10 @@ public interface ApiService {
             @Path("email") String email,
             @Path("upid") int upid
     );
+
+    @GET("/get_combined_data")
+    Call<CombinedDataResponse> getCombinedData();
+
+    @POST("/create_post")
+    Call<CreatePostResponse> createPost(@Body CreatePostRequest postRequest);
 }

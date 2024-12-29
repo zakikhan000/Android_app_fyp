@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.ProgressBar;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -98,7 +99,7 @@ public class UserActivity extends AppCompatActivity {
         Call<Void> call = apiService.registerUser(userRequest);
         call.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onResponse(Call<Void> call, @NonNull Response<Void> response) {
                 progressBar.setVisibility(View.GONE); // Hide ProgressBar after response
 
                 if (response.isSuccessful()) {
@@ -107,7 +108,9 @@ public class UserActivity extends AppCompatActivity {
                 } else if (response.code() == 409) {
                     Toast.makeText(UserActivity.this, "Email or Username already registered", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(UserActivity.this, "Failed to register user", Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(UserActivity.this, "OTP sent to your email. Please verify.", Toast.LENGTH_SHORT).show();
+                    showOtpDialog(email); // Show OTP dialog
                 }
 
                 // Show the Register button again after failure

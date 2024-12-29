@@ -38,7 +38,7 @@ public class CombinedUserActivity extends AppCompatActivity {
             public void onResponse(Call<CombinedDataResponse> call, Response<CombinedDataResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     combinedUsers.clear();
-                    combinedUsers.addAll(response.body().getCombinedData());
+//                    combinedUsers.addAll(response.body().getCombinedData());
                     adapter.notifyDataSetChanged();
                 }
             }
