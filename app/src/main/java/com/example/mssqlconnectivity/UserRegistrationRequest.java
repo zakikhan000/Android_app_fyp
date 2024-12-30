@@ -12,6 +12,9 @@ public class UserRegistrationRequest {
         Username = username;
         Password = password;
         ConfirmPassword = confirmPassword;
-        PhoneNo = phoneNo;
+        PhoneNo = String.valueOf(phoneNo);
+    }
+
+    public UserRegistrationRequest(String username, String phoneNo, String password, String confirmPassword, Boolean aTrue) {
     }
 }

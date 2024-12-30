@@ -1,71 +1,81 @@
 package com.example.mssqlconnectivity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Authentication extends AppCompatActivity {
 
-    String email, password, conpassword, username, phone, fn,mn,ln,age,country,city,an,postal;
-
-     EditText et1, et2,et3,et4,et5;
+    private EditText etEmail, etUsername, etPhone, etPassword, etConfirmPassword;
+    private Button updateButton;
+    private ApiService apiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_authentication);
-        Button btn = findViewById(R.id.updatebt);
-        Intent i = getIntent();
-        email = i.getStringExtra("email");
-        password = i.getStringExtra("pass");
-        conpassword = i.getStringExtra("cpass");
-        username = i.getStringExtra("username");
-        phone = i.getStringExtra("phone");
-        fn = i.getStringExtra("fn");
-        mn = i.getStringExtra("mn");
-        ln = i.getStringExtra("ln");
-        age = i.getStringExtra("age");
-        country = i.getStringExtra("country");
-        city = i.getStringExtra("city");
-        an = i.getStringExtra("an");
-        postal = i.getStringExtra("postal");
 
-        et2 = findViewById(R.id.et_username);
-        et3 = findViewById(R.id.et_phone);
+        // Initialize UI components
+        etEmail = findViewById(R.id.et_email);
+        etUsername = findViewById(R.id.et_username);
+        etPhone = findViewById(R.id.et_phone);
+        etPassword = findViewById(R.id.et_password);
+        etConfirmPassword = findViewById(R.id.et_confirm_password);
+        updateButton = findViewById(R.id.updatebt);
 
-        et1 = findViewById(R.id.et_email);
-        et1.setText(email);
-        et2.setText(username);
-        et3.setText(phone);
+        // Initialize API client
+        apiService = ApiClient.getApiClient().create(ApiService.class);
 
+        // Set button click listener
+        updateButton.setOnClickListener(v -> updateAuthentication());
+    }
 
-        EditText et1 = findViewById(R.id.et_old_password);
-        btn.setOnClickListener(new View.OnClickListener() {
+    private void updateAuthentication() {
+        String email = etEmail.getText().toString().trim();
+        String username = etUsername.getText().toString().trim();
+        String phoneNo = etPhone.getText().toString().trim();
+        String password = etPassword.getText().toString().trim();
+        String confirmPassword = etConfirmPassword.getText().toString().trim();
+
+        if (email.isEmpty() || username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+            Toast.makeText(this, "All fields are required!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Create the request object
+        UserAuthenticationRequest request = new UserAuthenticationRequest(
+                username,
+                phoneNo,
+                password,
+                confirmPassword,
+                Boolean.TRUE,  // Example value for email visibility
+                Boolean.TRUE   // Example value for username visibility
+        );
+
+        // Make the API call
+        Call<ResponseBody> call = apiService.updateUserAuthentication(email, request);
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onClick(View v) {
-                if(et1.getText().toString().equals("123"))
-                {
-
-                    Toast.makeText(getApplicationContext(), "Updated", Toast.LENGTH_SHORT).show();
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(Authentication.this, "Updated Successfully!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(Authentication.this, "Update Failed! Response Code: " + response.code(), Toast.LENGTH_SHORT).show();
                 }
-                else {
-                    Toast.makeText(getApplicationContext(), "Your Old Password is incorrect", Toast.LENGTH_SHORT).show();
-                }
+            }
 
-
-
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(Authentication.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 }

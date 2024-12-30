@@ -90,7 +90,7 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="435dp"
-        tools:listitem="@layout/custompost"
+        tools:listitem="@layout/item_combined_data"
         android:layout_marginTop="8dp"
         android:scrollbars="vertical" />
 

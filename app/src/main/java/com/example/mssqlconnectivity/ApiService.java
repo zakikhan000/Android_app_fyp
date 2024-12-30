@@ -3,6 +3,7 @@ package com.example.mssqlconnectivity;
 import java.util.List;
 
 import okhttp3.MultipartBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -77,4 +78,10 @@ public interface ApiService {
 
     @POST("/create_post")
     Call<CreatePostResponse> createPost(@Body CreatePostRequest postRequest);
+
+    @PUT("auth/{email}")
+    Call<ResponseBody> updateUserAuthentication(@Path("email") String email, @Body UserAuthenticationRequest request);
+
+    @PUT("users/{email}")
+    Call<Void> updateUserByEmails(@Path("email") String email, @Body Users user);
 }
